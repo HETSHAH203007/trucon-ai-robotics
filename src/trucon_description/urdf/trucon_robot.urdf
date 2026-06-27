@@ -148,8 +148,82 @@
   <origin xyz="-0.1 0 0.15" rpy="0 0 0"/>
   <axis xyz="0 1 0"/>
   <limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
-</joint>
+</joint><!-- Right Wheel -->
+  <link name="right_wheel_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.04"/>
+      </geometry>
+      <material name="dark_gray">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <inertia ixx="0.001" iyy="0.001" izz="0.001"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
 
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel_link"/>
+    <origin xyz="0.1 0 -0.1" rpy="0 1.5708 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Left Wheel -->
+  <link name="left_wheel_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.04"/>
+      </geometry>
+      <material name="dark_gray2">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <inertia ixx="0.001" iyy="0.001" izz="0.001"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel_link"/>
+    <origin xyz="-0.1 0.0 -0.1" rpy="0 1.5708 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+<!-- Differential Drive Plugin -->
+  <gazebo>
+    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+      <ros>
+        <remapping>cmd_vel:=/cmd_vel</remapping>
+        <remapping>odom:=/odom</remapping>
+      </ros>
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.2</wheel_separation>
+      <wheel_diameter>0.1</wheel_diameter>
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+    </plugin>
+  </gazebo>
 <!-- Camera Sensor -->
   <gazebo reference="camera_link">
     <sensor type="camera" name="head_camera">
