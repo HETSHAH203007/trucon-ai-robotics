@@ -1,18 +1,51 @@
+# Trucon AI — Humanoid Desk Robot
+
+**Robotics Software & Simulation | Intern Project**
+Developed under the supervision of Founder — Ruchi M. Rajput
+
+---
+
+## About
+
+This repository contains all ROS 2 software, Gazebo simulations, and hardware integration code for the Trucon AI humanoid desk robot — a privacy-first AI desk robot incubated at IIT Gandhinagar and Rashtriya Raksha University.
+
+---
+
+## Progress
+
+| Week | Focus | Status |
+|------|-------|--------|
+| Week 1 | Environment Setup, Simulation, Vision, Movement | Done |
+| Week 2 | Humanoid Simulation, Arm Integration | Upcoming |
+| Week 3 | Voice Commands, Mobile App | Upcoming |
+
+---
+
+## Repository Structure
+
+    trucon-ai-robot/
+    ├── src/
+    │   ├── trucon_description/     # URDF, Gazebo world, sensor plugins, diff drive
+    │   ├── trucon_camera/          # Camera feed, face detection, human detection
+    │   └── trucon_simulation/      # Reserved for future simulation worlds
+    ├── SETUP.md
+    └── README.md
+
 ---
 
 ## Tech Stack
 
-- **ROS 2 Humble** — middleware & communication
-- **Gazebo 11** — physics simulation
-- **OpenCV + Haar Cascade + HOG** — computer vision
-- **ESP32** — hardware microcontroller (Week 2)
-- **Python 3** — node development
+- ROS 2 Humble — middleware and communication
+- Gazebo 11 — physics simulation
+- OpenCV + Haar Cascade + HOG — computer vision
+- ESP32 — hardware microcontroller (Week 2)
+- Python 3 — node development
 
 ---
 
 ## Setup
 
-See [SETUP.md](./SETUP.md) for full environment setup instructions.
+See SETUP.md for full environment setup instructions.
 
 ---
 
@@ -34,29 +67,20 @@ See [SETUP.md](./SETUP.md) for full environment setup instructions.
 
 | Topic | Type | Description |
 |-------|------|-------------|
-| `/head_camera/image_raw` | sensor_msgs/Image | Robot head camera |
-| `/imu/data` | sensor_msgs/Imu | IMU sensor |
-| `/proximity/range` | sensor_msgs/Range | Proximity sensor |
-| `/cmd_vel` | geometry_msgs/Twist | Velocity command input |
-| `/odom` | nav_msgs/Odometry | Odometry output |
+| /head_camera/image_raw | sensor_msgs/Image | Robot head camera |
+| /imu/data | sensor_msgs/Imu | IMU sensor |
+| /proximity/range | sensor_msgs/Range | Proximity sensor |
+| /cmd_vel | geometry_msgs/Twist | Velocity command input |
+| /odom | nav_msgs/Odometry | Odometry output |
 
 ---
 
 ## Quick Start
 
-```bash
-# Launch Gazebo simulation
-ros2 launch trucon_description gazebo.launch.py
-
-# Keyboard teleoperation
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
-
-# Live camera feed
-ros2 run trucon_camera camera_node
-
-# Face + human detection
-ros2 run trucon_camera vision_node
-```
+    ros2 launch trucon_description gazebo.launch.py
+    ros2 run teleop_twist_keyboard teleop_twist_keyboard
+    ros2 run trucon_camera camera_node
+    ros2 run trucon_camera vision_node
 
 ---
 
@@ -66,4 +90,4 @@ Daily reports are submitted per the Trucon AI internship format covering tasks c
 
 ---
 
-*Working Hours: 6:00 PM – 12:00 AM (Mon–Sun)*
+Working Hours: 6:00 PM - 12:00 AM (Mon-Sun)
