@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'camera_node = trucon_camera.camera_node:main'
+            'camera_node = trucon_camera.camera_node:main',
+            'vision_node = trucon_camera.vision_node:main',
         ],
     },
 )
