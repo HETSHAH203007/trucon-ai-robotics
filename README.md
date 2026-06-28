@@ -1,49 +1,11 @@
-# Trucon AI — Humanoid Desk Robot
-
-**Robotics Software & Simulation | Intern Project**
-Developed under the supervision of Founder — Ruchi M. Rajput
-
----
-
-## About
-
-This repository contains all ROS 2 software, Gazebo simulations, and hardware integration code for the Trucon AI humanoid desk robot — a privacy-first AI desk robot incubated at IIT Gandhinagar and Rashtriya Raksha University.
-
----
-
-## Progress
-
-| Week | Focus | Status |
-|------|-------|--------|
-| Week 1 | Environment Setup, Simulation, Vision, ESP32 | 🔄 In Progress |
-| Week 2 | Humanoid Simulation, Arm Integration | ⏳ Upcoming |
-| Week 3 | Voice Commands, Mobile App | ⏳ Upcoming |
-
----
-
-## Repository Structure
-
-```
-trucon-ai-robot/
-├── src/
-│   ├── trucon_description/     # URDF / robot model
-│   ├── trucon_simulation/      # Gazebo worlds & launch files
-│   ├── trucon_vision/          # Camera, face & object detection
-│   ├── trucon_control/         # Movement, velocity control
-│   └── trucon_hardware/        # ESP32 bridge & serial comms
-├── docs/                       # Documentation & demo videos
-├── SETUP.md                    # Environment setup guide
-└── README.md
-```
-
 ---
 
 ## Tech Stack
 
 - **ROS 2 Humble** — middleware & communication
-- **Gazebo** — physics simulation
-- **OpenCV + YOLOv8** — computer vision
-- **ESP32** — hardware microcontroller
+- **Gazebo 11** — physics simulation
+- **OpenCV + Haar Cascade + HOG** — computer vision
+- **ESP32** — hardware microcontroller (Week 2)
 - **Python 3** — node development
 
 ---
@@ -58,11 +20,43 @@ See [SETUP.md](./SETUP.md) for full environment setup instructions.
 
 - [x] ROS 2 workspace configured
 - [x] GitHub repository created
-- [ ] Gazebo simulation world
-- [ ] Robot movement demo
-- [ ] Camera + OpenCV integration
-- [ ] Face & object detection
-- [ ] ESP32 serial bridge
+- [x] Gazebo simulation world
+- [x] Robot URDF — 6 links, camera, IMU, proximity sensors
+- [x] Robot spawn demo in Gazebo
+- [x] Differential drive + keyboard teleoperation
+- [x] Live camera feed via OpenCV
+- [x] Face detection + human detection with bounding boxes
+- [ ] ESP32 serial bridge — skipped (no hardware available)
+
+---
+
+## ROS 2 Topics
+
+| Topic | Type | Description |
+|-------|------|-------------|
+| `/head_camera/image_raw` | sensor_msgs/Image | Robot head camera |
+| `/imu/data` | sensor_msgs/Imu | IMU sensor |
+| `/proximity/range` | sensor_msgs/Range | Proximity sensor |
+| `/cmd_vel` | geometry_msgs/Twist | Velocity command input |
+| `/odom` | nav_msgs/Odometry | Odometry output |
+
+---
+
+## Quick Start
+
+```bash
+# Launch Gazebo simulation
+ros2 launch trucon_description gazebo.launch.py
+
+# Keyboard teleoperation
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+# Live camera feed
+ros2 run trucon_camera camera_node
+
+# Face + human detection
+ros2 run trucon_camera vision_node
+```
 
 ---
 
