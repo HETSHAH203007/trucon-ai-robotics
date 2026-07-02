@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
             'camera_node = trucon_camera.camera_node:main',
             'vision_node = trucon_camera.vision_node:main',
+	    'arm_control_node = trucon_camera.arm_control_node:main',
         ],
     },
 )
