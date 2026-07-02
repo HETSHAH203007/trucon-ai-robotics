@@ -26,6 +26,7 @@ install(DIRECTORY
   urdf
   worlds
   launch
+  config
   DESTINATION share/${PROJECT_NAME}
 )
 ament_package()
