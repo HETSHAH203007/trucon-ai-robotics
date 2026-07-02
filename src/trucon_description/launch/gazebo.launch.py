@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch.actions import ExecuteProcess, TimerAction
 from launch_ros.actions import Node
 
+
 def generate_launch_description():
 
     pkg = get_package_share_directory('trucon_description')
@@ -31,7 +32,8 @@ def generate_launch_description():
         Node(
             package='gazebo_ros',
             executable='spawn_entity.py',
-            arguments=['-topic', '/robot_description', '-entity', 'trucon_robot'],
+            arguments=['-topic', '/robot_description', '-entity', 'trucon_robot',
+                       '-x', '0', '-y', '0', '-z', '0.83'],
             output='screen'
         ),
 
@@ -39,7 +41,13 @@ def generate_launch_description():
             period=5.0,
             actions=[
                 ExecuteProcess(
-                    cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'joint_state_broadcaster'],
+                    cmd=[
+                        'ros2',
+                        'control',
+                        'load_controller',
+                        '--set-state',
+                        'active',
+                        'joint_state_broadcaster'],
                     output='screen'
                 ),
             ]
@@ -49,7 +57,13 @@ def generate_launch_description():
             period=6.0,
             actions=[
                 ExecuteProcess(
-                    cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'gripper_controller'],
+                    cmd=[
+                        'ros2',
+                        'control',
+                        'load_controller',
+                        '--set-state',
+                        'active',
+                        'gripper_controller'],
                     output='screen'
                 ),
             ]
